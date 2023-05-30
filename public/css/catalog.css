@@ -1,0 +1,68 @@
+@font-face {
+  font-family: "MAK";
+  font-style: normal;
+  font-weight: 400;
+
+  src: local("MAK"),
+    url("/font/Mak/MAK.otf") format("otf");
+}
+
+@font-face {
+  font-family: "MAK";
+  font-style: normal;
+  font-weight: 700;
+
+  src: local("MAK"),
+    url("/font/Mak/MAK-bold.otf") format("otf");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+
+  src: local("Roboto"),
+    url("/font/Roboto/Roboto-Regular.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+
+  src: local("Roboto"),
+    url("/font/Roboto/Roboto-Bold.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+
+  src: local("Roboto"),
+    url("/font/Roboto/Roboto-Thin.woff") format("woff");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --collor1: #E8DABF;
+  --collor2: #C92F27;
+  --collor5: #D2B681;
+  --collor3: #1E1515;
+  --collor4: #FFEBDD;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  background-color: var(--collor1);
+  color: var(--collor2);
+  box-sizing: border-box;
+}
+.category{background-color: #C92F27;width: 30vw; height: 4vw;}
+.drid{background-color: blueviolet;width: 30vw; height: 4vw;}
+footer{}
