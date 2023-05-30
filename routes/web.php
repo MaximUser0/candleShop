@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,31 +14,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('about', function () {
-    return view('about');
-});
-Route::get('catalog', function () {
-    return view('catalog');
-});
-Route::get('contact', function () {
-    return view('contact');
-});
-Route::get('del', function () {
-    return view('del');
-});
-Route::get('delete', function () {
-    return view('delete');
-});
-Route::get('delivery', function () {
-    return view('delivery');
-});
-Route::get('profile', function () {
-    return view('profile');
-});
-Route::get('profile2', function () {
-    return view('profile2');
-});
+Route::get('/', function(){
+    $user = Auth::check();
+    return view('index', compact("user"));
+})->name('index');
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/registration', [AuthController::class, 'registration']);
+Route::get('/logout', [AuthController::class, 'logout']);
+
+Route::get('/about', function(){
+    $user = Auth::check();
+    return view('about', compact("user"));
+})->name('about');
+
+Route::get('/catalog', function(){
+    $user = Auth::check();
+    return view('catalog', compact("user"));
+})->name('catalog');
+
+Route::get('/contact', function(){
+    $user = Auth::check();
+    return view('contact', compact("user"));
+})->name('contact');
+
+Route::get('/delivery', function(){
+    $user = Auth::check();
+    return view('delivery', compact("user"));
+})->name('delivery');
+
+Route::view('/profile', 'profile');
+
+Route::view('/profile2', 'profile2');
+
 

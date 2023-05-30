@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf_token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="css/accordion.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Candellia</title>
@@ -11,32 +12,76 @@
 <body>
 
 
-<!-- HTML модального окна -->
+<!-- HTML модального окна регистрации -->
 <div id="openModal2" class="modal2">
   <div class="modal-dialog2">
     <div class="modal-content2">
       <div class="modal-header2">
-      <a href=""><p class="vxod"> Регистрация</p></a> 
-      <a href=""><p class="create">Cоздать аккаунт</p></a> 
+      <a href=""><p class="vxod">Регистрация</p></a> 
+      <a href="#openModal3"><p class="create">Вход</p></a> 
         <a href="#close" title="Close" class="close"><svg class="closes" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M19 1L1.44337 19M18.5566 19L1 1" stroke="#C92F27" stroke-width="2" />
         </svg>
-</a>
+        </a>
       </div>
       <div class="modal-body2">
-        <form action="">
-<label for="">Введите логин</label><br>
-<input type="email"><br>
-<label for="">Введите пароль</label><br>
-<input type="password"><br>
-<label for="">Введите пароль еще раз</label><br>
-<input type="password"><br>
-<button class="bb">Войти</button><br>
+        <form method="POST" action="registration">
+            @csrf
+            <label for="email">Введите почту</label><br>
+            @error('email')
+            <label>{{ $message }}</label><br>
+            @enderror
+            <input name="email" type="email"><br>
+            
+            <label for="password">Введите пароль</label><br>
+            <input name="password" type="password"><br>
+            <label for="password_confirmation">Введите пароль еще раз</label><br>
+            @error('password')
+            <label>{{ $message }}</label><br>
+            @enderror
+            <input name="password_confirmation" type="password"><br>
+            <button class="bb">Войти</button><br>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<!-- HTML модального окна входа -->
+<div id="openModal3" class="modal2">
+    <div class="modal-dialog2">
+      <div class="modal-content2">
+        <div class="modal-header2">
+          <a href="">
+            <p class="vxod">Вход</p>
+          </a>
+          <a href="#openModal2">
+            <p class="create">Cоздать аккаунт</p>
+          </a>
+          <a href="#close" title="Close" class="close"><svg class="closes" width="20" height="20" viewBox="0 0 20 20"
+              fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 1L1.44337 19M18.5566 19L1 1" stroke="#C92F27" stroke-width="2" />
+            </svg>
+          </a>
+        </div>
+        <div class="modal-body2">
+          <form method="POST" action="login">
+            @csrf
+            @error('form')
+            <label>{{ $message }}</label><br>
+            @enderror
+            <label for="email">Введите почту</label><br>
+            <input name="email" type="email"><br>
+            <label for="password">Введите пароль</label><br>
+            <input name="password" type="password"><br>
+          
+            <button class="bb">Войти</button><br>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- HTML кнопки -->
 
@@ -148,7 +193,7 @@
             <li><a href="" class="link__nav__catalog">Каталог</a>
             <li><a href="about" class="link__nav__about__us">О нас</a>
             <li><a href="delivery" class="link__nav__payment__delivery">Оплата и доставка</a>
-            <li><a href="#" class="link__nav__sign__in">Войти</a>
+            <li><a href="<?= $user ? '/logout' : '#openModal3' ?>" class="link__nav__sign__in"><?= $user ? 'Выйти' : 'Войти' ?></a>
             <a href="contact" class="link__nav__contact">Контакты</a>
         </ul>
         </nav>
@@ -183,10 +228,10 @@
             <div class="link__logo">
                 <a href="/" class="logo">Logo</a>
             </div>
-
+            
             <div class="nav__right">
                 <div class="link___sign__in">
-                    <a href="#openModal2" class="link__nav__sign__in">Войти</a>
+                    <a href="<?= $user ? '/logout' : '#openModal3' ?>" class="link__nav__sign__in"><?= $user ? 'Выйти' : 'Войти' ?></a>
                 </div>
                 <div class="link___bag">
                     <a href="#" class="modal-trigger" data-modal="modal-name">Корзина</a>
@@ -389,7 +434,7 @@
                 <div class="brand__top__photo"></div>
             </div>
         </div>
-        <dib class="brand__container__bottom">
+        <div class="brand__container__bottom">
             <div class="brand__bottom__left">
                 <div class="photo__left__brand"></div>
                 <div class="link__universe__text">
@@ -405,7 +450,7 @@
                 </div>
                 <div class="photo__brand__right"></div>
             </div>
-        </dib>
+        </div>
     </section>
     <section class="FAQ">
         <div class="block__top">

@@ -24,7 +24,7 @@
             <li><a href="" class="link__nav__catalog">Каталог</a>
             <li><a href="about" class="link__nav__about__us">О нас</a>
             <li><a href="delivery" class="link__nav__payment__delivery">Оплата и доставка</a>
-            <li><a href="" class="link__nav__sign__in">Войти</a>
+            <li><a href="<?= $user ? '/logout' : '../#openModal3' ?>" class="link__nav__sign__in"><?= $user ? 'Выйти' : 'Войти' ?></a>
             <a href="contact" class="link__nav__contact">Контакты</a>
         </ul>
         </nav>
@@ -59,7 +59,7 @@
 
             <div class="nav__right">
                 <div class="link___sign__in">
-                    <a href="" class="link__nav__sign__in">Войти</a>
+                    <a href="<?= $user ? '/logout' : '../#openModal3' ?>" class="link__nav__sign__in"><?= $user ? 'Выйти' : 'Войти' ?></a>
                 </div>
                 <div class="link___bag">
                     <a href="" class="link__nav__bag">Корзина</a>

@@ -60,7 +60,7 @@
  <div class="info">
 <p class="logo">logo</p><br>
 <p class="roli">Aдминимтратор</p><br><br><br><br><br><br>
-<a class="people"    href="prifile2" >Пользователи</a><br><br>
+<a class="people"    href="profile2" >Пользователи</a><br><br>
 <a class="tovar" href="">Товары</a><br><br>
 <button class="bb2"><a  href="#openModal2"> Добавить новый продукт</a></button><br>
 <button class="button">Выйти</button><br>

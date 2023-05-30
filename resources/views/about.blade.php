@@ -23,7 +23,7 @@
             <li><a href="" class="link__nav__catalog">Каталог</a>
             <li><a href="about" class="link__nav__about__us">О нас</a>
             <li><a href="delivery" class="link__nav__payment__delivery">Оплата и доставка</a>
-            <li><a href="" class="link__nav__sign__in">Войти</a>
+            <li><a href="<?= $user ? '/logout' : '../#openModal3' ?>" class="link__nav__sign__in"><?= $user ? 'Выйти' : 'Войти' ?></a>
             <a href="contact" class="link__nav__contact">Контакты</a>
         </ul>
         </nav>
@@ -57,7 +57,7 @@
 
             <div class="nav__right">
                 <div class="link___sign__in">
-                    <a href="" class="link__nav__sign__in">Войти</a>
+                    <a href="<?= $user ? '/logout' : '../#openModal3' ?>" class="link__nav__sign__in"><?= $user ? 'Выйти' : 'Войти' ?></a>
                 </div>
                 <div class="link___bag">
                     <a href="" class="link__nav__bag">Корзина</a>
@@ -67,7 +67,9 @@
                 </div>
             </div>
         </nav>
-        <div class="container__header">
+        
+    </header>
+        <div class="container__header"> 
             <div class="top__header">
                 <h1 class="title__header">Наша команда</h1>
                 <div class="line">
@@ -91,8 +93,6 @@
                 </div>
             </div>
         </div>
-    </header>
-
     <section class="concern">
         <h2 class="concern__title">Мы заботимся о планете</h2>
         <div class="container__concern">
