@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CandleController;
+use App\Models\Candle;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//View's routes
 Route::get('/', function(){
     $user = Auth::check();
-    return view('index', compact("user"));
+    $role = 0;
+    if($user){
+        $role = Auth::user()->role;
+    }
+    return view('index', compact(['user', 'role']));
 })->name('index');
-
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/registration', [AuthController::class, 'registration']);
-Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/about', function(){
     $user = Auth::check();
@@ -30,7 +34,8 @@ Route::get('/about', function(){
 
 Route::get('/catalog', function(){
     $user = Auth::check();
-    return view('catalog', compact("user"));
+    $candles = Candle::all();
+    return view('catalog', compact(["user", 'candles']));
 })->name('catalog');
 
 Route::get('/contact', function(){
@@ -43,8 +48,43 @@ Route::get('/delivery', function(){
     return view('delivery', compact("user"));
 })->name('delivery');
 
-Route::view('/profile', 'profile');
+Route::get('/candle/{id}', function($id){
+    $candle = Candle::find($id);
+    if($candle === null){
+        return abort('404');
+    }
+    return view('candle', compact("candle"));
+})->name('candle');
 
-Route::view('/profile2', 'profile2');
+//Controller's routes
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/registration', [AuthController::class, 'registration']);
+
+
+Route::middleware('user')->group(function(){
+    
+    Route::get('/logout', [AuthController::class, 'logout']);
+
+    Route::middleware('admin')->group(function(){
+        Route::get('/profile', function(){
+            $candles = Candle::all();
+            return view('profile', compact('candles'));
+        })->name('profile');
+    
+        Route::get('/profile2', function(){
+            return view('profile2');
+        })->name('profile2');
+
+        
+        Route::post('/candle/{id}', [CandleController::class, 'update']);
+        Route::delete('/candle/{id}', [CandleController::class, 'destroy']);
+    });
+
+});
+
+Route::post('/candle', [CandleController::class, 'store']);
+
+
+
 
 

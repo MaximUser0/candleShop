@@ -230,6 +230,11 @@
             </div>
             
             <div class="nav__right">
+                @if ($role == 1)
+                    <div class="link">
+                        <a href="<?=route('profile')?>">Адмика</a>
+                    </div> 
+                @endif
                 <div class="link___sign__in">
                     <a href="<?= $user ? '/logout' : '#openModal3' ?>" class="link__nav__sign__in"><?= $user ? 'Выйти' : 'Войти' ?></a>
                 </div>

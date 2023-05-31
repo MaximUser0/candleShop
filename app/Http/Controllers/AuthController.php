@@ -29,13 +29,12 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required',
         ]);
-        $validate["password"] = Hash::make($validate["password"]);
 
-        /*$user = User::create($validate);
+        $user = User::create($validate);
         if($user){
             Auth::login($user);
             return redirect(route('index'));
-        } */
+        }
     }
 
     public function login(Request $request){
@@ -57,7 +56,7 @@ class AuthController extends Controller
             return redirect(route('index'));
         }
         Auth::logout();
-        return redirect()->back();;
+        return redirect()->back();
     }
 
 }

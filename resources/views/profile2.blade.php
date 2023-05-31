@@ -59,12 +59,12 @@
   </div>
   <div class="flex">
     <div class="info">
-      <p class="logo">logo</p><br>
+      <a href="../"><p class="logo">logo</p></a><br>
       <p class="roli">Aдминимтратор</p><br><br><br><br><br><br>
       <a class="people" >Пользователи</a><br><br>
       <a class="tovar" href="profile">Товары</a><br><br>
       <button class="bb2"><a href="#openModal2"> Добавить новый продукт</a></button><br>
-      <button class="button">Выйти</button><br>
+      <a href="../logout"><button class="button">Выйти</button></a><br>
 
     </div>
 

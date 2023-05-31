@@ -433,103 +433,25 @@
    
    </div>
    <div class="drid">
-<div class="block"> 
-<img class="img_catalog" src="img/Brand_photo_01.png" alt="">
-<p class="names">Name</p>
-<div class="flexxx">
-<p class="price">960 руб.</p>
-<svg class="korzina" width="33" height="37" viewBox="0 0 33 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path
-    d="M9.14493 16.2025V6.59494C9.70531 5.06329 11.9188 2 16.2899 2C20.6609 2 22.8744 5.06329 23.4348 6.59494V16.2025M2 11.6076C2 18.1519 2 31.4911 2 32.4937C2 33.4962 4.52174 34.5823 5.78261 35C11.8068 35 24.4435 35 26.7971 35C29.1507 35 30.5797 32.4937 31 31.2405V11.6076H16.5H2Z"
-    stroke="#C92F27" stroke-width="3" />
-</svg>
-
-
-</div>
-</div>
-
-<div class="block">
-  <img class="img_catalog" src="img/Brand_photo_01.png" alt="">
-  <p class="names">Name</p>
-  <div class="flexxx">
-    <p class="price">960 руб.</p>
-    <svg class="korzina" width="33" height="37" viewBox="0 0 33 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M9.14493 16.2025V6.59494C9.70531 5.06329 11.9188 2 16.2899 2C20.6609 2 22.8744 5.06329 23.4348 6.59494V16.2025M2 11.6076C2 18.1519 2 31.4911 2 32.4937C2 33.4962 4.52174 34.5823 5.78261 35C11.8068 35 24.4435 35 26.7971 35C29.1507 35 30.5797 32.4937 31 31.2405V11.6076H16.5H2Z"
-        stroke="#C92F27" stroke-width="3" />
-    </svg>
-
-
-  </div>
-</div>
-
-<div class="block">
-  <img class="img_catalog" src="img/Brand_photo_01.png" alt="">
-  <p class="names">Name</p>
-  <div class="flexxx">
-    <p class="price">960 руб.</p>
-    <svg class="korzina" width="33" height="37" viewBox="0 0 33 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M9.14493 16.2025V6.59494C9.70531 5.06329 11.9188 2 16.2899 2C20.6609 2 22.8744 5.06329 23.4348 6.59494V16.2025M2 11.6076C2 18.1519 2 31.4911 2 32.4937C2 33.4962 4.52174 34.5823 5.78261 35C11.8068 35 24.4435 35 26.7971 35C29.1507 35 30.5797 32.4937 31 31.2405V11.6076H16.5H2Z"
-        stroke="#C92F27" stroke-width="3" />
-    </svg>
-
-
-  </div>
-</div>
-
-<div class="block">
-  <img class="img_catalog" src="img/Brand_photo_01.png" alt="">
-  <p class="names">Name</p>
-  <div class="flexxx">
-    <p class="price">960 руб.</p>
-    <svg class="korzina" width="33" height="37" viewBox="0 0 33 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M9.14493 16.2025V6.59494C9.70531 5.06329 11.9188 2 16.2899 2C20.6609 2 22.8744 5.06329 23.4348 6.59494V16.2025M2 11.6076C2 18.1519 2 31.4911 2 32.4937C2 33.4962 4.52174 34.5823 5.78261 35C11.8068 35 24.4435 35 26.7971 35C29.1507 35 30.5797 32.4937 31 31.2405V11.6076H16.5H2Z"
-        stroke="#C92F27" stroke-width="3" />
-    </svg>
-
-
-  </div>
-</div>
-
-<div class="block">
-  <img class="img_catalog" src="img/Brand_photo_01.png" alt="">
-  <a href="#openModal3"><p class="names">Name</p></a>
-  <div class="flexxx">
-    <p class="price">960 руб.</p>
-    <svg class="korzina" width="33" height="37" viewBox="0 0 33 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M9.14493 16.2025V6.59494C9.70531 5.06329 11.9188 2 16.2899 2C20.6609 2 22.8744 5.06329 23.4348 6.59494V16.2025M2 11.6076C2 18.1519 2 31.4911 2 32.4937C2 33.4962 4.52174 34.5823 5.78261 35C11.8068 35 24.4435 35 26.7971 35C29.1507 35 30.5797 32.4937 31 31.2405V11.6076H16.5H2Z"
-        stroke="#C92F27" stroke-width="3" />
-    </svg>
-
-
-  </div>
-</div>
+    @foreach ($candles as $candle)
+    <a href="../candle/<?= $candle['id'] ?>#openModal3" class="block"> 
+      <img class="img_catalog" src="<?= $candle['img_main'] ?>" alt="">
+      <p class="names" style="text-overflow: ellipsis; width: 278px; white-space: nowrap; overflow: hidden;"><?= $candle['title'] ?></p>
+      <div class="flexxx">
+        <p class="price"><?= $candle['price'] ?> руб.</p>
+        <svg class="korzina" width="33" height="37" viewBox="0 0 33 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M9.14493 16.2025V6.59494C9.70531 5.06329 11.9188 2 16.2899 2C20.6609 2 22.8744 5.06329 23.4348 6.59494V16.2025M2 11.6076C2 18.1519 2 31.4911 2 32.4937C2 33.4962 4.52174 34.5823 5.78261 35C11.8068 35 24.4435 35 26.7971 35C29.1507 35 30.5797 32.4937 31 31.2405V11.6076H16.5H2Z"
+            stroke="#C92F27" stroke-width="3" 
+          />
+        </svg>
+      </div>
+    </a>
+    @endforeach
 
    </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <footer>

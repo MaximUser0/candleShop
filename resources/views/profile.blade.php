@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="csrf_token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="css/profile.css">
 <title>Candellia</title>
 </head>
@@ -25,11 +25,15 @@
           </a>
         </div>
         <div class="modal-body2">
-          <form action="">
-            <label for="">Введите название</label><br>
-            <input type="text"><br>
-            <select>
-              <option>Выберите аромат</option>
+          <form action="/candle" method="POST" enctype="multipart/form-data">
+            @csrf
+            <label>Введите название</label><br>
+            <input type="text" name="title" required><br>
+            @error('aroma')
+              <label>{{ $message }}</label><br>
+            @enderror
+            <select name="aroma" required>
+              <option value="null">Выберите аромат</option>
               <option>Травяной</option>
               <option>Древесный</option>
               <option>Пряный</option>
@@ -37,20 +41,23 @@
               <option>Фруктовый</option>
               <option>Цветочный</option>
               <option>Ягодный</option>
-            
-            </select><BR>
-            <label for="">Добавить цену</label><br>
-            <input type="text"><br>
-         
-	<label class="input-file">
-	   	
- 	   	<span class="input-file-btn">Выберите изображение</span> <br>
-	   
- 	</label>
-
-            
-            <textarea name="" id="" cols="30" rows="10" placeholder="Добавить описание"></textarea><br>
-            <button class="bb">Добавить</button><br>
+            </select><br>
+            <label>Добавить цену</label><br>
+            <input name="price" type="text" required><br>
+            <label>Указать объем</label><br>
+            <input name="volume" type="text" required><br>
+	          <label class="input-file">   	
+ 	   	        <span class="input-file-btn">Выберите изображение</span> <br>
+ 	          </label>
+            @error('files')
+              <label>{{ $message }}</label><br>
+            @enderror
+            <input type="file" name="img_main" required>
+            <input type="file" name="img_1" required>
+            <input type="file" name="img_2" required>
+            <input type="file" name="img_3" required>
+            <textarea name="description" cols="30" rows="10" placeholder="Добавить описание" required></textarea><br>
+            <button class="bb" type="submit">Добавить</button><br>
           </form>
         </div>
       </div>
@@ -58,46 +65,22 @@
   </div>
   <div class="flex">
  <div class="info">
-<p class="logo">logo</p><br>
+<a href="../"><p class="logo">logo</p></a><br>
 <p class="roli">Aдминимтратор</p><br><br><br><br><br><br>
-<a class="people"    href="profile2" >Пользователи</a><br><br>
+<a class="people" href="profile2" >Пользователи</a><br><br>
 <a class="tovar" href="">Товары</a><br><br>
 <button class="bb2"><a  href="#openModal2"> Добавить новый продукт</a></button><br>
-<button class="button">Выйти</button><br>
+<a href="../logout"><button class="button">Выйти</button></a><br>
 
  </div>
 
   <div class="windows">
-
+    @foreach ($candles as $candle)
     <div class="infor"> 
-      <img class="images" src="img/Photo_product.png" alt="">
-      <p class="name">Name</p>
+      <img class="images" src="<?= $candle['img_main'] ?>" alt="">
+      <p class="name"><?= $candle['title'] ?></p>
     </div>
-    <div class="infor">
-    <img class="images" src="img/Photo_product.png" alt="">
-     <p class="name">Name</p>
-    </div>
-    <div class="infor">
-    <img class="images" src="img/Photo_product.png" alt="">
-     <p class="name">Name</p>
-    </div>
-    <div class="infor">
-    <img class="images" src="img/Photo_product.png" alt="">
-     <p class="name">Name</p>
-    </div>
-    <div class="infor">
-    <img class="images" src="img/Photo_product.png" alt="">
-     <p class="name">Name</p>
-    </div>
-    <div class="infor">
-    <img class="images" src="img/Photo_product.png" alt="">
-     <p class="name">Name</p>
-    </div>
-    <div class="infor">
-    <img class="images" src="img/Photo_product.png" alt="">
-     <p class="name">Name</p>
-    </div>
-    
+    @endforeach
   </div>
 
   </div>
@@ -172,7 +155,7 @@
   <script src="js/main.js"></script>
   <script src="js/accordion.min.js"></script>
   <script src="js/index.js"></script>
-  <div id="openModal2" class="modal2">
+  <div id="openModal2" class="modal2"> 
     <div class="modal-dialog2">
       <div class="modal-content2">
         <div class="modal-header2">
