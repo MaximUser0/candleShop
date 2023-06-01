@@ -113,6 +113,14 @@ body {
   display: none;
 }
 
+.hidden{
+  display: none!important;
+}
+
+.checkM::after{
+  display: block!important;
+}
+
 @media only screen and (max-width: 480px) {
   .navigation__pc {
     display: none;

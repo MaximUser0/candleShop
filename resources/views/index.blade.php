@@ -403,21 +403,21 @@
             <div class="photo__text__universe universr__photo__item01">
                 <div class="photo__item01__uni"></div>
                 <div class="link__universe__text">
-                    <a class="text__link__uni" href="">Genshin Impact</a>
+                    <a class="text__link__uni" href="catalog/?universe=Genshin Impact">Genshin Impact</a>
                     <div class="arrow__link__uni"></div>
                 </div>
             </div>
             <div class="photo__text__universe universr__photo__item01">
                 <div class="photo__item02__uni"></div>
                 <div class="link__universe__text">
-                    <a class="text__link__uni" href="">Клуб Winx</a>
+                    <a class="text__link__uni" href="catalog/?universe=Клуб Винкс">Клуб Winx</a>
                     <div class="arrow__link__uni"></div>
                 </div>
             </div>
             <div class="photo__text__universe universr__photo__item01">
                 <div class="photo__item03__uni"></div>
                 <div class="link__universe__text">
-                    <a class="text__link__uni" href="">Гарри Поттер</a>
+                    <a class="text__link__uni" href="catalog/?universe=Гарри Поттер">Гарри Поттер</a>
                     <div class="arrow__link__uni"></div>
                 </div>
             </div>
