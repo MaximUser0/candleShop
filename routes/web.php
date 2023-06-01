@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BanController;
 use App\Http\Controllers\CandleController;
 use App\Models\Candle;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,17 +74,20 @@ Route::middleware('user')->group(function(){
         })->name('profile');
     
         Route::get('/profile2', function(){
-            return view('profile2');
+            $users = User::all();
+            return view('profile2', compact('users'));
         })->name('profile2');
 
-        
+        Route::post('/candle', [CandleController::class, 'store']);
         Route::post('/candle/{id}', [CandleController::class, 'update']);
-        Route::delete('/candle/{id}', [CandleController::class, 'destroy']);
+        Route::get('/candle/delete/{id}', [CandleController::class, 'destroy']);
+        Route::get('/ban/{id}', [BanController::class, 'ban']);
+        Route::post('/find', [BanController::class, 'find']);
     });
 
 });
 
-Route::post('/candle', [CandleController::class, 'store']);
+
 
 
 

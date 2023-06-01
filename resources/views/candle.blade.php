@@ -6,10 +6,70 @@
     <meta name="csrf_token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <title>Candellia</title>
 </head>
 <body>
-  <div id="openModal3" class="modal3" style="opacity: 100%;">
+  <div id="openModal4" class="modal2">
+    <div class="modal-dialog2">
+      <div class="modal-content2">
+        <div class="modal-header2">
+          <a href="">
+            <p class="vxod"> Добавить продукт</p>
+          </a>
+         
+          <a href="#openModal3" title="Close" class="close"><svg class="closes" width="20" height="20" viewBox="0 0 20 20"
+              fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 1L1.44337 19M18.5566 19L1 1" stroke="#C92F27" stroke-width="2" />
+            </svg>
+          </a>
+        </div>
+        <div class="modal-body2">
+          <form action="/candle/<?= $candle['id'] ?>" method="POST" enctype="multipart/form-data">
+            @csrf
+            <label>Измените название</label><br>
+            <input type="text" name="title" required value="<?= $candle['title'] ?>"><br>
+            @error('aroma')
+              <label>{{ $message }}</label><br>
+            @enderror
+            <select name="aroma" required>
+              <option value="null">Измените аромат</option>
+              <option>Травяной</option>
+              <option>Древесный</option>
+              <option>Пряный</option>
+              <option>Сладкий</option>
+              <option>Фруктовый</option>
+              <option>Цветочный</option>
+              <option>Ягодный</option>
+            </select><br>
+            <select name="universe" required>
+              <option value="null">Выберите вселенную</option>
+              <option>Genshin Impact</option>
+              <option>Гарри Поттер</option>
+              <option>Клуб Винкс</option>
+            </select><br>
+            <label>Изменить цену</label><br>
+            <input name="price" type="text" required value="<?= $candle['price'] ?>"><br>
+            <label>Изменить объем</label><br>
+            <input name="volume" type="text" required  value="<?= $candle['volume'] ?>"><br>
+	          <label class="input-file">   	
+ 	   	        <span class="input-file-btn">Изменить изображение</span> <br>
+ 	          </label>
+            @error('files')
+              <label>{{ $message }}</label><br>
+            @enderror
+            <input type="file" name="img_main">
+            <input type="file" name="img_1">
+            <input type="file" name="img_2">
+            <input type="file" name="img_3">
+            <textarea name="description" cols="30" rows="10" placeholder="Изменить описание" required><?= $candle['description'] ?></textarea><br>
+            <button class="bb" type="submit">Добавить</button><br>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="openModal3" class="modal3" style="opacity: 100%; position: unset;">
         <div class="modal-dialog">
           <div class="modal-content3" style="padding-bottom: 5vw;">
             <div class="modal-header3">
@@ -33,6 +93,12 @@
                 <DIV class="block_info">
       
                  <p class="p1"><?= $candle['title'] ?></p>
+                 @if (auth()->user()->role == 1)
+                    <form action="../candle/delete/<?= $candle['id'] ?>" method="GET">
+                      <a href="#openModal4">Обновить</a>
+                      <button type="submit">Удалить</button>
+                    </form>
+                 @endif
                  <p class="p2">Аромат: <?= $candle['aroma'] == null ? 'без аромата' :  $candle['aroma'] ?></p>
                  <p class="p2">Вселенная: <?= $candle['universe'] == null ? 'без вселенной' :  $candle['universe'] ?></p>
                  <p class="p3"><?= $candle['volume'] ?> мл</p>

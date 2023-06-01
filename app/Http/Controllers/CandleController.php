@@ -37,17 +37,17 @@ class CandleController extends Controller
         $candle = Candle::find($id);
 
         $candle->title = $request['title'];
-        $candle->aroma = $request['aroma'];
-        $candle->universe = $request['universe'];
+        if($request['aroma'] != 'null'){$candle->aroma = $request['aroma'];}
+        if($request['universe'] != 'null'){$candle->universe = $request['universe'];}
         $candle->volume = $request['volume'];
         $candle->price = $request['price'];
         $candle->description = $request['description'];
 
         $imgs = ['img_main', 'img_1', 'img_2', 'img_3'];
-
+        print_r($_FILES);
         foreach($imgs as $img){
-            if(isset($_FILES[$img])){
-                unlink($candle[$img]);
+            if(isset($_FILES[$img]) && $_FILES[$img]['size'] != 0){
+                if(file_exists($candle[$img])){unlink($candle[$img]);}
                 $path = 'download/img/' . time() . $_FILES[$img]['name'];
                 copy($_FILES[$img]['tmp_name'], $path);
                 $candle[$img] = $path;
@@ -65,7 +65,7 @@ class CandleController extends Controller
         $imgs = ['img_main', 'img_1', 'img_2', 'img_3'];
 
         foreach($imgs as $img){
-            unlink($candle[$img]);
+            if(file_exists($candle[$img])){unlink($candle[$img]);}
         }
 
         $candle->delete();

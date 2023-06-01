@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="csrf_token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="css/profile2.css">
   <title>Candellia</title>
 </head>
@@ -69,40 +69,29 @@
     </div>
 
     <div class="windows">
-      <div class="div"> 
-<div class="border"> <p class="Poisk">найти пользователя</p></div>
-<div class="ban">
-<p class="peoples">Kseniia.karpova1@gmail.com</p>
-<button class="button_ban">Бан</button>
-
-</div>
-<div class="div">
-  
-  <div class="ban">
-    <p class="peoples">Kseniia.karpova1@gmail.com</p>
-    <button class="button_ban">Бан</button>
-
-  </div>
-  <div class="div">
-    
-    <div class="ban">
-      <p class="peoples">Kseniia.karpova1@gmail.com</p>
-      <button class="button_ban">Бан</button>
-  
-    </div>
-    <div class="div">
-      
-      <div class="ban">
-        <p class="peoples">Kseniia.karpova1@gmail.com</p>
-        <button class="button_ban">Бан</button>
-    
-      </div>
-
-      </div>
-
-     
-
-    </div>
+      <form action="../find" method="POST" class="div" style="height: auto;"> 
+        @csrf
+        <div class="border">
+          <input name="find" class="Poisk" placeholder="найти пользователя" style="background-color: transparent; border: none; outline:none;">
+          <button type="submit">Поиск</button>
+        </div>
+        </form>
+        <div class="div">
+          @foreach($users as $user)
+            @if ($user['id'] != auth()->user()->id)
+            <div 
+                class="ban <?php 
+                if(isset($_GET['find'])){
+                  echo strpos($user['email'], $_GET['find']) === false ? 'hidden' : '';
+                }
+                ?>"
+            >
+              <p class="peoples"><?= $user['email'] ?></p>
+              <button class="button_ban"><a href="../ban/<?= $user['id'] ?>"><?= $user['ban'] == 0 ? 'Бан' : 'Разбан' ?></a></button>
+            </div> 
+            @endif
+          @endforeach
+        </div>
 
   </div>
 

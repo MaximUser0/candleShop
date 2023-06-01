@@ -42,6 +42,12 @@
               <option>Цветочный</option>
               <option>Ягодный</option>
             </select><br>
+            <select name="universe" required>
+              <option value="null">Выберите вселенную</option>
+              <option>Genshin Impact</option>
+              <option>Гарри Поттер</option>
+              <option>Клуб Винкс</option>
+            </select><br>
             <label>Добавить цену</label><br>
             <input name="price" type="text" required><br>
             <label>Указать объем</label><br>
@@ -76,10 +82,10 @@
 
   <div class="windows">
     @foreach ($candles as $candle)
-    <div class="infor"> 
+    <a href="../candle/<?= $candle['id'] ?>#openModal3" class="infor">
       <img class="images" src="<?= $candle['img_main'] ?>" alt="">
       <p class="name"><?= $candle['title'] ?></p>
-    </div>
+    </a>
     @endforeach
   </div>
 

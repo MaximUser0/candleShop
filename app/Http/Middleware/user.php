@@ -19,6 +19,12 @@ class user
         if(!Auth::check()){
             return redirect()->back();
         }
+        if(Auth::user()->ban == 1){
+            Auth::logout();
+            return redirect(route('index') . '#openModal3')->withErrors([
+                'form' => "Вы заблокированы, обратитесь к админестратору!"
+            ]);
+        }
         return $next($request);
     }
 }

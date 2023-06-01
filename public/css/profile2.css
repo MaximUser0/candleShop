@@ -218,7 +218,9 @@ a {
   margin-top: 36.3vh;
 }
 
-
+.hidden{
+  display: none!important;
+}
 
 .modal2 {
   position: fixed;

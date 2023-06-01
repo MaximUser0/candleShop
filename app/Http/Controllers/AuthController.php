@@ -43,6 +43,12 @@ class AuthController extends Controller
         }
         $form = $request->only(['email', 'password']);
         if(Auth::attempt($form)){
+            if(Auth::user()->ban == 1){
+                Auth::logout();
+                return redirect(route('index') . '#openModal3')->withErrors([
+                    'form' => "Вы заблокированы, обратитесь к админестратору!"
+                ]);
+            }
             return redirect(route('index'));
         }
 
