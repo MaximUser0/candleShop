@@ -43,7 +43,7 @@
         <nav class="navigation__pc">
             <div class="nav__left">
                 <div class="link___catalog">
-                    <a href="" class="link__nav__catalog">Каталог</a>
+                    <a href="catalog" class="link__nav__catalog">Каталог</a>
                 </div>
                 <div class="link___about__us">
                     <a href="about" class="link__nav__about__us">О нас</a>

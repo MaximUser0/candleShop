@@ -17,7 +17,7 @@ class user
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::check()){
-            return redirect()->back();
+            return redirect(route('index'));
         }
         if(Auth::user()->ban == 1){
             Auth::logout();

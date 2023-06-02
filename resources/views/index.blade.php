@@ -101,68 +101,27 @@
     </div>
 
     <div class="modal-body">
-      <div class="t1">
-        <div class="div1"><img class="img_tovar" src="img/Photo_prouct.png" alt=""></div>
+        <?php $itog = 0 ?>
+        @foreach ($baskets as $basket)
+        <?php $itog += $basket['price'] * $basket['count'] ?>
+        <div class="t1">
+        <div class="div1"><img class="img_tovar" src="<?=$basket['img']?>" alt=""></div>
         <div class="div2">
-          <p class="name">Ароматическая свеча “Кли”</p>
+          <p class="name"><?=$basket['title']?></p>
           <div class="quantity_inner">
-            <button class="bt_minus">-</button>
-            <input type="text" class="quantity" value="1" data-max-count="20">
-            <button class="bt_plus">+</button>
-
+            <button class="bt_minus"><a href="./basket/minus/<?= $basket['id'] ?>">-</a></button>
+            <input type="text" class="quantity" value="<?=$basket['count']?>" data-max-count="20">
+            <button class="bt_plus"><a href="./basket/plus/<?= $basket['id'] ?>">+</a></button>
           </div>
-          <h1 class="price">920руб.</h1>
+          <h1 class="price"><?=$basket['price']?>руб.</h1>
         </div>
-
-
-      </div>
-      <div class="t1">
-        <div class="div1"><img class="img_tovar" src="img/Photo_prouct.png" alt=""></div>
-        <div class="div2">
-          <p class="name">Ароматическая свеча “Кли”</p>
-          <div class="quantity_inner">
-            <button class="bt_minus">-</button>
-            <input type="text" class="quantity" value="1" data-max-count="20">
-            <button class="bt_plus">+</button>
-
-          </div>
-          <h1 class="price">920руб.</h1>
         </div>
-
-
-      </div>
-      <div class="t1">
-        <div class="div1"><img class="img_tovar" src="img/Photo_prouct.png" alt=""></div>
-        <div class="div2">
-          <p class="name">Ароматическая свеча “Кли”</p>
-          <div class="quantity_inner">
-            <button class="bt_minus">-</button>
-            <input type="text" class="quantity" value="1" data-max-count="20">
-            <button class="bt_plus">+</button>
-
-          </div>
-          <h1 class="price">920руб.</h1>
-        </div>
-      </div>
-      <div class="t1">
-        <div class="div1"><img class="img_tovar" src="img/Photo_prouct.png" alt=""></div>
-        <div class="div2">
-          <p class="name">Ароматическая свеча “Кли”</p>
-          <div class="quantity_inner">
-            <button class="bt_minus">-</button>
-            <input type="text" class="quantity" value="1" data-max-count="20">
-            <button class="bt_plus">+</button>
-
-          </div>
-          <h1 class="price">920руб.</h1>
-        </div>
-      </div>
-
-    </div>
+        @endforeach
+   </div>
     <div class="divv2">
 
       <h1 class="h12a">Итогo</h1>
-      <h1 class="h11a">3100руб.</h1>
+      <h1 class="h11a"><?=$itog?>руб.</h1>
     </div>
     <button class="button_korz">Оформление заказа</button>
   </div>

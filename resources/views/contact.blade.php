@@ -20,7 +20,7 @@
             <a href="//dbmast.ru/">Candle</a> 
         </h2>
         <ul>
-            <li><a href="" class="link__nav__catalog">Каталог</a>
+            <li><a href="catalog" class="link__nav__catalog">Каталог</a>
             <li><a href="about" class="link__nav__about__us">О нас</a>
             <li><a href="delivery" class="link__nav__payment__delivery">Оплата и доставка</a>
             <li><a href="<?= $user ? '/logout' : '../#openModal3' ?>" class="link__nav__sign__in"><?= $user ? 'Выйти' : 'Войти' ?></a>
@@ -41,10 +41,10 @@
         <nav class="navigation__pc">
             <div class="nav__left">
                 <div class="link___catalog">
-                    <a href="" class="link__nav__catalog">Каталог</a>
+                    <a href="catalog" class="link__nav__catalog">Каталог</a>
                 </div>
                 <div class="link___about__us">
-                    <a href="" class="link__nav__about__us">О нас</a>
+                    <a href="about" class="link__nav__about__us">О нас</a>
                 </div>
                 <div class="link___payment__delivery">
                     <a href="delivery" class="link__nav__payment__delivery">Оплата и доставка</a>

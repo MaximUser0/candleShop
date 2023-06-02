@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BanController;
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CandleController;
+use App\Http\Controllers\CommentController;
+use App\Models\Basket;
 use App\Models\Candle;
+use App\Models\Comment;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,10 +26,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function(){
     $user = Auth::check();
     $role = 0;
+    $baskets = [];
     if($user){
         $role = Auth::user()->role;
+        $baskets = Basket::where('id_user', '=', auth()->user()->id)->get();
+        foreach($baskets as $basket){
+            $arr = Candle::find($basket['id_candle']); 
+            $basket['img'] = $arr['img_main'];
+            $basket['price'] = $arr['price'];
+            $basket['title'] = $arr['title'];
+        }
     }
-    return view('index', compact(['user', 'role']));
+    return view('index', compact(['user', 'role', 'baskets']));
 })->name('index');
 
 Route::get('/about', function(){
@@ -37,7 +48,17 @@ Route::get('/about', function(){
 Route::get('/catalog', function(){
     $user = Auth::check();
     $candles = Candle::all();
-    return view('catalog', compact(["user", 'candles']));
+    $baskets = [];
+    if($user){
+        $baskets = Basket::where('id_user', '=', auth()->user()->id)->get();
+        foreach($baskets as $basket){
+            $arr = Candle::find($basket['id_candle']); 
+            $basket['img'] = $arr['img_main'];
+            $basket['price'] = $arr['price'];
+            $basket['title'] = $arr['title'];
+        }
+    }
+    return view('catalog', compact(["user", 'candles', 'baskets']));
 })->name('catalog');
 
 Route::get('/contact', function(){
@@ -55,7 +76,11 @@ Route::get('/candle/{id}', function($id){
     if($candle === null){
         return abort('404');
     }
-    return view('candle', compact("candle"));
+    $comments = Comment::where('id_candle', '=', $id)->get();
+    foreach($comments as $comment){
+        $comment['name'] = User::find($comment['id_user'])['email']; 
+    }
+    return view('candle', compact(['candle', 'comments']));
 })->name('candle');
 
 //Controller's routes
@@ -66,6 +91,13 @@ Route::post('/registration', [AuthController::class, 'registration']);
 Route::middleware('user')->group(function(){
     
     Route::get('/logout', [AuthController::class, 'logout']);
+    Route::post('/comment/{id}', [CommentController::class, 'store']);
+    Route::get('/comment/{id}', [CommentController::class, 'destroy']);
+
+    Route::post('/basket/{id}', [BasketController::class, 'store']);
+    Route::get('/basket/{id}', [BasketController::class, 'destroy']);
+    Route::get('/basket/plus/{id}', [BasketController::class, 'plus']);
+    Route::get('/basket/minus/{id}', [BasketController::class, 'minus']);
 
     Route::middleware('admin')->group(function(){
         Route::get('/profile', function(){
@@ -86,10 +118,4 @@ Route::middleware('user')->group(function(){
     });
 
 });
-
-
-
-
-
-
 

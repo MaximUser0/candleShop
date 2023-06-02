@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('baskets', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('id_candle')->unsigned();
-            $table->text('content');
-            $table->integer('grade');
+            $table->integer('count');
             $table->foreign('id_user')
                 ->references('id')
                 ->on('users')
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('baskets');
     }
 };

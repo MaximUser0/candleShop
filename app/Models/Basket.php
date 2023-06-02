@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Basket extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'content',
-        'grade',
+        'count',
         'id_user',
         'id_candle',
     ];
-    
+
 }
